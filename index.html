@@ -496,13 +496,20 @@
       font-weight: 800;
       margin-bottom: 8px;
     }
-    .cta-phone a {
+    .cta-phone .phone-number {
+      display: inline-block;
       font-size: clamp(1.6rem, 4vw, 2.2rem);
       font-weight: 800;
       color: var(--yellow-400);
       text-decoration: none;
     }
-    .cta-phone a:hover { text-decoration: underline; }
+    .cta-phone .phone-number:hover { text-decoration: underline; }
+    .cta-phone .btn {
+      color: var(--white);
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+    .cta-phone .btn:hover { text-decoration: none; }
     .cta-phone p { color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-top: 8px; }
     .qr-block {
       text-align: center;
@@ -826,7 +833,7 @@
     <div class="container cta-grid">
       <div class="cta-phone">
         <h2>Liên hệ ngay!</h2>
-        <a href="tel:0984985198">0984 985 198</a>
+        <a href="tel:0984985198" class="phone-number">0984 985 198</a>
         <p>Gọi hoặc nhắn tin để được tư vấn lộ trình phù hợp và đăng ký giữ chỗ.</p>
         <div style="margin-top:20px">
           <a href="https://zalo.me/0984985198" target="_blank" rel="noopener" class="btn btn-primary">💬 Nhắn Zalo ngay</a>
