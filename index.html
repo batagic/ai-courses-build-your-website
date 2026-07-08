@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Khởi Tạo Website Cùng AI – Không Cần Lập Trình</title>
+  <meta name="description" content="Tự tạo website chuyên nghiệp chỉ với AI. Nhanh chóng – Dễ dàng – Tiết kiệm. Khai giảng 15/07/2026.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue-900: #0a2463;
+      --blue-700: #1e4fd8;
+      --blue-500: #3b82f6;
+      --blue-100: #e8f0fe;
+      --cyan-400: #22d3ee;
+      --orange-500: #f97316;
+      --orange-100: #fff7ed;
+      --purple-600: #7c3aed;
+      --purple-100: #f3e8ff;
+      --green-500: #22c55e;
+      --red-500: #ef4444;
+      --yellow-400: #facc15;
+      --gray-50: #f8fafc;
+      --gray-100: #f1f5f9;
+      --gray-200: #e2e8f0;
+      --gray-500: #64748b;
+      --gray-700: #334155;
+      --gray-900: #0f172a;
+      --white: #ffffff;
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+      --shadow-md: 0 4px 20px rgba(15, 23, 42, 0.1);
+      --shadow-lg: 0 12px 40px rgba(15, 23, 42, 0.14);
+      --radius: 16px;
+      --radius-sm: 10px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Be Vietnam Pro', system-ui, sans-serif;
+      color: var(--gray-700);
+      background: var(--gray-50);
+      line-height: 1.65;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(1120px, 92vw);
+      margin-inline: auto;
+    }
+
+    /* ── Top bar ── */
+    .top-bar {
+      background: var(--blue-900);
+      color: rgba(255,255,255,0.85);
+      font-size: 0.85rem;
+      padding: 8px 0;
+      text-align: center;
+    }
+    .top-bar strong { color: var(--yellow-400); }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, var(--blue-900) 0%, #1a3a8f 50%, var(--blue-700) 100%);
+      color: var(--white);
+      padding: 56px 0 64px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 80% 20%, rgba(34,211,238,0.15) 0%, transparent 50%),
+        radial-gradient(circle at 10% 80%, rgba(249,115,22,0.1) 0%, transparent 40%);
+      pointer-events: none;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+      position: relative;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .hero-badge span {
+      width: 8px; height: 8px;
+      background: var(--cyan-400);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
+    }
+    .hero h1 {
+      font-size: clamp(1.75rem, 4vw, 2.6rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .hero h1 .highlight-cyan { color: var(--cyan-400); }
+    .hero h1 .highlight-yellow { color: var(--yellow-400); }
+    .hero-sub {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 32px;
+      max-width: 480px;
+    }
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 100px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--orange-500), #ea580c);
+      color: var(--white);
+      box-shadow: 0 4px 20px rgba(249,115,22,0.4);
+    }
+    .btn-primary:hover { box-shadow: 0 6px 28px rgba(249,115,22,0.5); }
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 2px solid rgba(255,255,255,0.5);
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.1); }
+    .hero-poster {
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+    }
+
+    /* ── Section common ── */
+    section { padding: 72px 0; }
+    .section-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(1.4rem, 3vw, 1.9rem);
+      font-weight: 800;
+      color: var(--gray-900);
+      line-height: 1.25;
+      margin-bottom: 12px;
+    }
+    .section-desc {
+      color: var(--gray-500);
+      font-size: 1rem;
+      max-width: 560px;
+      margin-bottom: 40px;
+    }
+    .section-header { text-align: center; }
+    .section-header .section-desc { margin-inline: auto; }
+
+    /* ── Audience ── */
+    .audience { background: var(--white); }
+    .audience .section-label { background: var(--purple-100); color: var(--purple-600); }
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .audience-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px 24px;
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .audience-card:hover {
+      border-color: var(--purple-600);
+      box-shadow: var(--shadow-sm);
+    }
+    .audience-icon {
+      flex-shrink: 0;
+      width: 44px; height: 44px;
+      background: var(--purple-100);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+    }
+    .audience-card h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 4px;
+    }
+    .audience-card p { font-size: 0.875rem; color: var(--gray-500); }
+
+    /* ── Objectives ── */
+    .objectives { background: var(--blue-100); }
+    .objectives .section-label { background: rgba(30,79,216,0.12); color: var(--blue-700); }
+    .objectives-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 16px;
+    }
+    .objective-item {
+      display: flex;
+      gap: 16px;
+      padding: 24px;
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-sm);
+    }
+    .objective-num {
+      flex-shrink: 0;
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, var(--blue-700), var(--blue-500));
+      color: var(--white);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.9rem;
+    }
+    .objective-item p {
+      font-size: 0.925rem;
+      color: var(--gray-700);
+      font-weight: 500;
+    }
+
+    /* ── Learning process ── */
+    .process { background: var(--white); }
+    .process .section-label { background: var(--orange-100); color: var(--orange-500); }
+    .timeline {
+      position: relative;
+      max-width: 720px;
+      margin-inline: auto;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--orange-500), var(--blue-500));
+    }
+    .timeline-item {
+      position: relative;
+      padding: 0 0 32px 56px;
+    }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-dot {
+      position: absolute;
+      left: 10px;
+      top: 4px;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 3px solid var(--orange-500);
+      z-index: 1;
+    }
+    .timeline-item.milestone .timeline-dot {
+      border-color: var(--blue-700);
+      background: var(--blue-700);
+    }
+    .timeline-item.final .timeline-dot {
+      border-color: var(--green-500);
+      background: var(--green-500);
+    }
+    .timeline-card {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      padding: 20px 24px;
+      transition: box-shadow 0.15s;
+    }
+    .timeline-card:hover { box-shadow: var(--shadow-md); }
+    .timeline-item.milestone .timeline-card {
+      background: var(--blue-100);
+      border-color: rgba(30,79,216,0.2);
+    }
+    .timeline-item.final .timeline-card {
+      background: #f0fdf4;
+      border-color: rgba(34,197,94,0.3);
+    }
+    .timeline-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--orange-500);
+      margin-bottom: 6px;
+    }
+    .timeline-item.milestone .timeline-tag { color: var(--blue-700); }
+    .timeline-item.final .timeline-tag { color: var(--green-500); }
+    .timeline-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 6px;
+    }
+    .timeline-card p { font-size: 0.9rem; color: var(--gray-500); }
+    .timeline-range {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--blue-700);
+      background: rgba(30,79,216,0.1);
+      padding: 2px 10px;
+      border-radius: 100px;
+    }
+
+    /* ── Outcomes ── */
+    .outcomes { background: var(--orange-100); }
+    .outcomes .section-label { background: rgba(249,115,22,0.15); color: #c2410c; }
+    .outcomes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+    }
+    .outcome-card {
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      padding: 24px 16px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.15s;
+    }
+    .outcome-card:hover { transform: translateY(-4px); }
+    .outcome-icon { font-size: 2rem; margin-bottom: 12px; }
+    .outcome-card h3 {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      line-height: 1.35;
+    }
+
+    /* ── Value + Pricing ── */
+    .pricing-section { background: var(--white); }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+    .value-box {
+      background: linear-gradient(135deg, var(--blue-900), var(--blue-700));
+      color: var(--white);
+      border-radius: var(--radius);
+      padding: 32px;
+    }
+    .value-box h3 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      margin-bottom: 24px;
+      color: var(--yellow-400);
+    }
+    .value-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+    .value-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.925rem;
+    }
+    .value-list .no { color: #fca5a5; font-weight: 800; flex-shrink: 0; }
+    .value-list .yes { color: var(--cyan-400); font-weight: 800; flex-shrink: 0; }
+    .pricing-card {
+      background: var(--gray-50);
+      border: 2px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 32px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .pricing-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--orange-500), var(--yellow-400));
+    }
+    .slots-badge {
+      display: inline-block;
+      background: var(--red-500);
+      color: var(--white);
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+      animation: pulse-badge 2s infinite;
+    }
+    @keyframes pulse-badge {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.4); }
+      50% { box-shadow: 0 0 0 8px rgba(239,68,68,0); }
+    }
+    .price-old {
+      font-size: 1.1rem;
+      color: var(--gray-500);
+      text-decoration: line-through;
+      margin-bottom: 8px;
+    }
+    .price-new {
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      font-weight: 800;
+      color: var(--blue-900);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .price-new span { color: var(--orange-500); }
+    .price-note { font-size: 0.85rem; color: var(--gray-500); margin-bottom: 24px; }
+    .pricing-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 24px;
+      text-align: left;
+    }
+    .meta-item {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+    }
+    .meta-item .label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--gray-500);
+      margin-bottom: 4px;
+    }
+    .meta-item .value {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--gray-900);
+    }
+
+    /* ── CTA section ── */
+    .cta-section {
+      background: linear-gradient(135deg, var(--blue-900), #1a3a8f);
+      color: var(--white);
+      padding: 64px 0;
+    }
+    .cta-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .cta-phone h2 {
+      font-size: clamp(1.4rem, 3vw, 1.8rem);
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .cta-phone a {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 800;
+      color: var(--yellow-400);
+      text-decoration: none;
+    }
+    .cta-phone a:hover { text-decoration: underline; }
+    .cta-phone p { color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-top: 8px; }
+    .qr-block {
+      text-align: center;
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow-lg);
+    }
+    .qr-block img {
+      width: 160px;
+      height: 160px;
+      margin: 0 auto 12px;
+      border-radius: 8px;
+    }
+    .qr-block p {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--gray-900);
+    }
+    .qr-block small {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--gray-500);
+      margin-top: 4px;
+    }
+    .cta-zalo p {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.6;
+    }
+    .cta-zalo strong { color: var(--cyan-400); }
+
+    /* ── Footer ── */
+    footer {
+      background: #060f2e;
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 20px;
+      font-size: 0.8rem;
+    }
+
+    /* ── Sticky mobile CTA ── */
+    .sticky-cta {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: var(--white);
+      border-top: 1px solid var(--gray-200);
+      padding: 12px 16px;
+      gap: 10px;
+      z-index: 100;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+    }
+    .sticky-cta .btn { flex: 1; padding: 12px; font-size: 0.85rem; }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+      .hero-poster { order: -1; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .cta-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .cta-phone { order: 1; }
+      .qr-block { order: 2; margin-inline: auto; }
+      .cta-zalo { order: 3; }
+      .sticky-cta { display: flex; }
+      body { padding-bottom: 72px; }
+      section { padding: 52px 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top urgency bar -->
+  <div class="top-bar">
+    Khai giảng <strong>15/07/2026</strong> &nbsp;·&nbsp; Chỉ còn <strong>3 suất</strong> &nbsp;·&nbsp; Giảm từ 4.500.000 → <strong>2.500.000 VNĐ</strong>
+  </div>
+
+  <!-- Hero -->
+  <header class="hero" id="top">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge"><span></span> Khóa học AI thực chiến 2026</div>
+        <h1>
+          <span class="highlight-cyan">KHỞI TẠO WEBSITE</span><br>
+          CÙNG AI:<br>
+          <span class="highlight-yellow">KHÔNG CẦN LẬP TRÌNH!</span>
+        </h1>
+        <p class="hero-sub">Tự tạo website chuyên nghiệp chỉ với AI.<br>Nhanh chóng – Dễ dàng – Tiết kiệm</p>
+        <div class="hero-cta">
+          <a href="tel:0984985198" class="btn btn-primary">📞 Đăng ký ngay</a>
+          <a href="#zalo" class="btn btn-outline">💬 Vào nhóm Zalo</a>
+        </div>
+      </div>
+      <div class="hero-poster">
+        <img src="assets/poster.png" alt="Khởi tạo Website cùng AI – Không cần lập trình">
+      </div>
+    </div>
+  </header>
+
+  <!-- Target audience -->
+  <section class="audience" id="doi-tuong">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Đối tượng</span>
+        <h2 class="section-title">Khóa học phù hợp với</h2>
+        <p class="section-desc">Dù bạn là ai, miễn có máy tính và kết nối Internet — bạn đều có thể bắt đầu ngay hôm nay.</p>
+      </div>
+      <div class="audience-grid">
+        <div class="audience-card">
+          <div class="audience-icon">👩‍🏫</div>
+          <div>
+            <h3>Giáo viên</h3>
+            <p>Muốn tạo website dạy học, chia sẻ tài liệu và tương tác với học sinh trực tuyến.</p>
+          </div>
+        </div>
+        <div class="audience-card">
+          <div class="audience-icon">🎓</div>
+          <div>
+            <h3>Học sinh, sinh viên</h3>
+            <p>Muốn xây dựng sản phẩm cá nhân, portfolio hoặc dự án học tập ấn tượng.</p>
+          </div>
+        </div>
+        <div class="audience-card">
+          <div class="audience-icon">💼</div>
+          <div>
+            <h3>Người kinh doanh</h3>
+            <p>Cần website giới thiệu dịch vụ, tiếp cận khách hàng mà không tốn chi phí thuê lập trình viên.</p>
+          </div>
+        </div>
+        <div class="audience-card">
+          <div class="audience-icon">🚀</div>
+          <div>
+            <h3>Người mới bắt đầu</h3>
+            <p>Muốn học AI ứng dụng vào thực tế, bắt đầu từ con số 0 không cần nền tảng kỹ thuật.</p>
+          </div>
+        </div>
+        <div class="audience-card">
+          <div class="audience-icon">🌐</div>
+          <div>
+            <h3>Bất kỳ ai</h3>
+            <p>Muốn sở hữu website riêng mà không mất nhiều thời gian học lập trình.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Course objectives -->
+  <section class="objectives" id="noi-dung">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Nội dung</span>
+        <h2 class="section-title">Khóa học sẽ hướng dẫn bạn từ con số 0</h2>
+        <p class="section-desc">5 kỹ năng cốt lõi giúp bạn tự chủ hoàn toàn sau khi kết thúc khóa học.</p>
+      </div>
+      <div class="objectives-grid">
+        <div class="objective-item">
+          <div class="objective-num">1</div>
+          <p>Xây dựng website bằng công cụ AI — không cần viết một dòng code.</p>
+        </div>
+        <div class="objective-item">
+          <div class="objective-num">2</div>
+          <p>Chỉnh sửa, nâng cấp và bổ sung tính năng bằng AI theo ý muốn.</p>
+        </div>
+        <div class="objective-item">
+          <div class="objective-num">3</div>
+          <p>Đưa website lên Internet với chi phí tối ưu, vận hành ổn định.</p>
+        </div>
+        <div class="objective-item">
+          <div class="objective-num">4</div>
+          <p>Kết nối tên miền riêng để có một website chuyên nghiệp, đáng tin cậy.</p>
+        </div>
+        <div class="objective-item">
+          <div class="objective-num">5</div>
+          <p>Biết cách cập nhật website bất cứ lúc nào mà không cần biết lập trình.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Learning process -->
+  <section class="process" id="lo-trinh">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Lộ trình</span>
+        <h2 class="section-title">Quy trình học tập</h2>
+        <p class="section-desc">11 buổi đồng hành từ tư vấn đến khi website của bạn chạy thật trên Internet.</p>
+      </div>
+      <div class="timeline">
+
+        <div class="timeline-item milestone">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <div class="timeline-tag">Buổi 0</div>
+            <h3>Tư vấn &amp; Cam kết</h3>
+            <p>Tư vấn phù hợp trước khi đăng ký học. Giải thích rõ chính sách hoàn tiền — bạn yên tâm trước khi bắt đầu.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <div class="timeline-tag">Buổi 1</div>
+            <h3>Làm quen &amp; Chuẩn bị</h3>
+            <p>Làm quen, giới thiệu phương pháp học tập. Cài đặt máy tính, công cụ và các chuẩn bị cần thiết để sẵn sàng xây dựng.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item milestone">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <div class="timeline-tag">Buổi 2</div>
+            <h3>Chọn đề tài cá nhân</h3>
+            <p>Chọn đề tài theo nhu cầu của học viên — muốn xây gì, build gì, làm gì sẽ được tư vấn 1-1 trực tiếp.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <div class="timeline-tag">Buổi 3 → Buổi 9</div>
+            <h3>Đồng hành xây dựng thực chiến</h3>
+            <p>Đồng hành xây dựng hệ thống theo nhu cầu cá nhân — chỉ tận tay, sai đâu sửa đó. Học trực tiếp từ các vướng mắc thực tế của học viên.</p>
+            <span class="timeline-range">7 buổi thực hành cá nhân hóa</span>
+          </div>
+        </div>
+
+        <div class="timeline-item final">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <div class="timeline-tag">Buổi 10</div>
+            <h3>Go-live &amp; Kết thúc khóa học</h3>
+            <p>Đưa website, tool, hệ thống lên Internet và chạy thật. Tổng kết, bàn giao và kết thúc khóa học — bạn sở hữu sản phẩm hoàn chỉnh.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Outcomes -->
+  <section class="outcomes" id="ket-qua">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Kết quả</span>
+        <h2 class="section-title">Sau khóa học, bạn có thể tự tạo</h2>
+        <p class="section-desc">Không chỉ là lý thuyết — bạn ra về với sản phẩm thực và kỹ năng tái sử dụng mãi mãi.</p>
+      </div>
+      <div class="outcomes-grid">
+        <div class="outcome-card">
+          <div class="outcome-icon">👤</div>
+          <h3>Website cá nhân</h3>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-icon">🏫</div>
+          <h3>Website trường học, lớp học</h3>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-icon">🛒</div>
+          <h3>Landing Page bán hàng</h3>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-icon">📝</div>
+          <h3>Blog chia sẻ kiến thức</h3>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-icon">🏢</div>
+          <h3>Website giới thiệu doanh nghiệp</h3>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-icon">🤖</div>
+          <h3>Công cụ AI chạy trực tuyến</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Value + Pricing -->
+  <section class="pricing-section" id="hoc-phi">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label" style="background:var(--blue-100);color:var(--blue-700)">Học phí</span>
+        <h2 class="section-title">Đầu tư thông minh — Kết quả thực tế</h2>
+      </div>
+      <div class="pricing-grid">
+        <div class="value-box">
+          <h3>3 KHÔNG – 1 CÓ</h3>
+          <ul class="value-list">
+            <li><span class="no">✕</span> KHÔNG cần biết lập trình</li>
+            <li><span class="no">✕</span> KHÔNG cần thuê lập trình viên</li>
+            <li><span class="no">✕</span> KHÔNG cần đầu tư chi phí lớn</li>
+            <li><span class="yes">✓</span> CHỈ CẦN: 1 chiếc máy tính + Kết nối Internet</li>
+          </ul>
+        </div>
+        <div class="pricing-card">
+          <div class="slots-badge">🔥 CÒN 3 SLOTS</div>
+          <div class="price-old">4.500.000 VNĐ</div>
+          <div class="price-new"><span>2.500.000</span> VNĐ</div>
+          <p class="price-note">Ưu đãi đăng ký sớm — tiết kiệm 2.000.000 VNĐ</p>
+          <a href="tel:0984985198" class="btn btn-primary" style="width:100%">Đăng ký ngay — 0984 985 198</a>
+          <div class="pricing-meta">
+            <div class="meta-item">
+              <div class="label">Khai giảng</div>
+              <div class="value">15/07/2026</div>
+            </div>
+            <div class="meta-item">
+              <div class="label">Hình thức học</div>
+              <div class="value">Online (Zoom) hoặc Offline</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA / Zalo -->
+  <section class="cta-section" id="zalo">
+    <div class="container cta-grid">
+      <div class="cta-phone">
+        <h2>Liên hệ ngay!</h2>
+        <a href="tel:0984985198">0984 985 198</a>
+        <p>Gọi hoặc nhắn tin để được tư vấn lộ trình phù hợp và đăng ký giữ chỗ.</p>
+        <div style="margin-top:20px">
+          <a href="https://zalo.me/0984985198" target="_blank" rel="noopener" class="btn btn-primary">💬 Nhắn Zalo ngay</a>
+        </div>
+      </div>
+      <div class="qr-block">
+        <img
+          src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://zalo.me/0984985198&color=0a2463"
+          alt="QR Code Zalo 0984 985 198"
+          width="160"
+          height="160"
+        >
+        <p>Quét QR để liên hệ</p>
+        <small>Vào nhóm trao đổi chuyên sâu</small>
+      </div>
+      <div class="cta-zalo">
+        <p>
+          <strong>Số điện thoại sử dụng cho Zalo</strong><br><br>
+          Quét mã QR hoặc nhấn nút bên cạnh để vào nhóm trao đổi chuyên sâu cùng giảng viên và học viên.<br><br>
+          Hỏi đáp trực tiếp, chia sẻ kinh nghiệm và nhận hỗ trợ trước khi đăng ký.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Khởi Tạo Website Cùng AI &nbsp;·&nbsp; Hotline: <a href="tel:0984985198" style="color:rgba(255,255,255,0.7)">0984 985 198</a></p>
+  </footer>
+
+  <!-- Sticky mobile CTA -->
+  <div class="sticky-cta">
+    <a href="tel:0984985198" class="btn btn-primary">📞 Gọi ngay</a>
+    <a href="https://zalo.me/0984985198" target="_blank" rel="noopener" class="btn btn-outline" style="color:var(--blue-700);border-color:var(--blue-700)">💬 Zalo</a>
+  </div>
+
+</body>
+</html>
