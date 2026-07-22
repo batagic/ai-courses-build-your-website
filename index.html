@@ -341,6 +341,50 @@
       margin-bottom: 6px;
     }
     .timeline-card p { font-size: 0.9rem; color: var(--gray-500); }
+    .infographic-block {
+      margin-top: 48px;
+      padding: 28px;
+      background: linear-gradient(180deg, var(--blue-100) 0%, var(--gray-50) 100%);
+      border: 1px solid rgba(30, 79, 216, 0.15);
+      border-radius: var(--radius);
+      text-align: center;
+    }
+    .infographic-block h3 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--blue-900);
+      margin-bottom: 8px;
+    }
+    .infographic-block p {
+      font-size: 0.95rem;
+      color: var(--gray-500);
+      max-width: 520px;
+      margin: 0 auto 20px;
+    }
+    .infographic-preview {
+      display: block;
+      max-width: 640px;
+      margin: 0 auto 20px;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-lg);
+      border: 1px solid rgba(30, 79, 216, 0.12);
+      overflow: hidden;
+      background: var(--white);
+    }
+    .infographic-preview img {
+      width: 100%;
+      height: auto;
+      max-height: 520px;
+      object-fit: cover;
+      object-position: top center;
+    }
+    .infographic-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+
     .timeline-range {
       display: inline-block;
       margin-top: 8px;
@@ -603,6 +647,7 @@
         <p class="hero-sub">Tự tạo website chuyên nghiệp chỉ với AI.<br>Nhanh chóng – Dễ dàng – Tiết kiệm</p>
         <div class="hero-cta">
           <a href="tel:0984985198" class="btn btn-primary">📞 Đăng ký ngay</a>
+          <a href="infographic-timeline.html" class="btn btn-outline">📅 Lộ trình 10 buổi</a>
           <a href="#zalo" class="btn btn-outline">💬 Vào nhóm Zalo</a>
         </div>
       </div>
@@ -699,56 +744,68 @@
       <div class="section-header">
         <span class="section-label">Lộ trình</span>
         <h2 class="section-title">Quy trình học tập</h2>
-        <p class="section-desc">11 buổi đồng hành từ tư vấn đến khi website của bạn chạy thật trên Internet.</p>
+        <p class="section-desc">10 buổi đồng hành từ nền tảng AI đến khi sản phẩm của bạn chạy thật trên Internet.</p>
       </div>
       <div class="timeline">
 
         <div class="timeline-item milestone">
           <div class="timeline-dot"></div>
           <div class="timeline-card">
-            <div class="timeline-tag">Buổi 0</div>
-            <h3>Tư vấn &amp; Cam kết</h3>
-            <p>Tư vấn phù hợp trước khi đăng ký học. Giải thích rõ chính sách hoàn tiền — bạn yên tâm trước khi bắt đầu.</p>
+            <div class="timeline-tag">Buổi 1</div>
+            <h3>Nền tảng AI</h3>
+            <p>Lịch sử AI, OpenAI/Claude, token &amp; tham số. Hiểu tổng quan trước khi bắt tay làm sản phẩm.</p>
           </div>
         </div>
 
         <div class="timeline-item">
           <div class="timeline-dot"></div>
           <div class="timeline-card">
-            <div class="timeline-tag">Buổi 1</div>
-            <h3>Làm quen &amp; Chuẩn bị</h3>
-            <p>Làm quen, giới thiệu phương pháp học tập. Cài đặt máy tính, công cụ và các chuẩn bị cần thiết để sẵn sàng xây dựng.</p>
+            <div class="timeline-tag">Buổi 2</div>
+            <h3>Quy trình &amp; chọn dự án</h3>
+            <p>Skill, rule làm việc với AI, GitHub và vòng lặp ý tưởng → kế hoạch → xây dựng theo nhu cầu cá nhân.</p>
           </div>
         </div>
 
         <div class="timeline-item milestone">
           <div class="timeline-dot"></div>
           <div class="timeline-card">
-            <div class="timeline-tag">Buổi 2</div>
-            <h3>Chọn đề tài cá nhân</h3>
-            <p>Chọn đề tài theo nhu cầu của học viên — muốn xây gì, build gì, làm gì sẽ được tư vấn 1-1 trực tiếp.</p>
+            <div class="timeline-tag">Buổi 3</div>
+            <h3>Cursor &amp; kế hoạch dự án</h3>
+            <p>Thành thạo Cursor, prompt tốt, hoàn thiện bộ tài liệu kỹ thuật – nghiệp vụ – ideas – rules.</p>
           </div>
         </div>
 
         <div class="timeline-item">
           <div class="timeline-dot"></div>
           <div class="timeline-card">
-            <div class="timeline-tag">Buổi 3 → Buổi 9</div>
-            <h3>Đồng hành xây dựng thực chiến</h3>
-            <p>Đồng hành xây dựng hệ thống theo nhu cầu cá nhân — chỉ tận tay, sai đâu sửa đó. Học trực tiếp từ các vướng mắc thực tế của học viên.</p>
-            <span class="timeline-range">7 buổi thực hành cá nhân hóa</span>
+            <div class="timeline-tag">Buổi 4 → Buổi 8</div>
+            <h3>Prototype &amp; hoàn thiện</h3>
+            <p>Xây prototype, chia giai đoạn, review liên tục và hoàn thiện sản phẩm qua các vòng lặp thực chiến.</p>
+            <span class="timeline-range">5 buổi xây dựng cá nhân hóa</span>
           </div>
         </div>
 
         <div class="timeline-item final">
           <div class="timeline-dot"></div>
           <div class="timeline-card">
-            <div class="timeline-tag">Buổi 10</div>
-            <h3>Go-live &amp; Kết thúc khóa học</h3>
-            <p>Đưa website, tool, hệ thống lên Internet và chạy thật. Tổng kết, bàn giao và kết thúc khóa học — bạn sở hữu sản phẩm hoàn chỉnh.</p>
+            <div class="timeline-tag">Buổi 9 → Buổi 10</div>
+            <h3>Đóng gói &amp; triển khai</h3>
+            <p>Deploy, roster dự án, rà soát rủi ro kỹ thuật &amp; bảo mật — bạn sở hữu sản phẩm hoàn chỉnh.</p>
           </div>
         </div>
 
+      </div>
+
+      <div class="infographic-block" id="timeline-chi-tiet">
+        <h3>Infographic lộ trình 10 buổi</h3>
+        <p>Xem đầy đủ lịch học, nội dung từng buổi và cam kết đầu ra — phù hợp để gửi học viên.</p>
+        <a class="infographic-preview" href="infographic-timeline.html" aria-label="Mở trang lộ trình chi tiết">
+          <img src="infographic-timeline.png" alt="Infographic lộ trình 10 buổi khoá học AI" loading="lazy" width="640" height="520">
+        </a>
+        <div class="infographic-actions">
+          <a href="infographic-timeline.html" class="btn btn-primary">Xem lộ trình chi tiết</a>
+          <a href="infographic-timeline.png" class="btn btn-outline" style="background:var(--white);color:var(--blue-700);border-color:rgba(30,79,216,0.25)" download>Tải ảnh PNG</a>
+        </div>
       </div>
     </div>
   </section>
