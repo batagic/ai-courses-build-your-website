@@ -441,8 +441,7 @@
             </div>
           </div>
           <div class="px-6 py-12 sm:px-10">
-            <!-- [CẦN BỔ SUNG: form action — nối Google Form / Cal.com / CRM] -->
-            <form class="space-y-4" action="#" method="post" onsubmit="return false;">
+            <form id="booking-form" class="space-y-4" action="#" method="post">
               <div>
                 <label for="name" class="mb-1.5 block text-sm font-semibold">Họ tên</label>
                 <input
@@ -471,10 +470,10 @@
                   name="need"
                   class="w-full rounded-xl border border-black/10 bg-paper px-4 py-3 text-sm outline-none ring-clay/30 focus:ring-2"
                 >
-                  <option value="kham-pha">Khám phá AI</option>
-                  <option value="go-ket">Gỡ kẹt &amp; kiểm tra</option>
-                  <option value="trao-tay">AI trao tay</option>
-                  <option value="chua-ro">Chưa rõ — giúp chọn</option>
+                  <option value="Khám phá AI">Khám phá AI</option>
+                  <option value="Gỡ kẹt &amp; kiểm tra">Gỡ kẹt &amp; kiểm tra</option>
+                  <option value="AI trao tay">AI trao tay</option>
+                  <option value="Chưa rõ — giúp chọn">Chưa rõ — giúp chọn</option>
                 </select>
               </div>
               <div>
@@ -488,13 +487,14 @@
                 ></textarea>
               </div>
               <button
+                id="booking-submit"
                 type="submit"
-                class="w-full rounded-full bg-clay py-3.5 text-sm font-semibold text-white transition hover:bg-clay-dark"
+                class="w-full rounded-full bg-clay py-3.5 text-sm font-semibold text-white transition hover:bg-clay-dark disabled:cursor-not-allowed disabled:opacity-60"
               >
                 Gửi yêu cầu đặt lịch
               </button>
-              <p class="text-center text-xs text-mute">
-                Form chưa nối hệ thống — <span class="text-ink">[CẦN BỔ SUNG: endpoint đặt lịch]</span>
+              <p id="booking-status" class="text-center text-xs text-mute" role="status" aria-live="polite">
+                Thông tin gửi thẳng vào Google Sheet đặt lịch.
               </p>
             </form>
           </div>
@@ -513,6 +513,60 @@
   </footer>
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
+
+    // Dán URL Web App sau khi Deploy Apps Script (file apps-script/Code.gs)
+    // Ví dụ: https://script.google.com/macros/s/XXXX/exec
+    const GAS_WEBAPP_URL = "";
+
+    const form = document.getElementById("booking-form");
+    const statusEl = document.getElementById("booking-status");
+    const submitBtn = document.getElementById("booking-submit");
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      if (!GAS_WEBAPP_URL) {
+        statusEl.textContent =
+          "Chưa cấu hình endpoint. Deploy Apps Script rồi dán GAS_WEBAPP_URL vào trang.";
+        statusEl.className = "text-center text-xs text-clay";
+        return;
+      }
+
+      const payload = {
+        name: form.name.value.trim(),
+        contact: form.contact.value.trim(),
+        need: form.need.value,
+        note: form.note.value.trim(),
+        source: "agentic-vibe-working",
+      };
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Đang gửi…";
+      statusEl.textContent = "Đang ghi vào Google Sheet…";
+      statusEl.className = "text-center text-xs text-mute";
+
+      try {
+        // no-cors: Apps Script nhận được request; response opaque nên coi như gửi xong
+        await fetch(GAS_WEBAPP_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(payload),
+        });
+
+        form.reset();
+        statusEl.textContent =
+          "Đã gửi — mình sẽ liên hệ xác nhận khung giờ sớm.";
+        statusEl.className = "text-center text-xs font-semibold text-ink";
+      } catch (err) {
+        statusEl.textContent =
+          "Gửi chưa được. Nhắn Zalo 0984 985 198 hoặc email thaotrinhminh@gmail.com.";
+        statusEl.className = "text-center text-xs text-clay";
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Gửi yêu cầu đặt lịch";
+      }
+    });
   </script>
 </body>
 </html>
