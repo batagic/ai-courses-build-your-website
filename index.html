@@ -1,188 +1,214 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>AI Courses — Vibe Coding & Agentic Vibe Working</title>
-  <meta name="description" content="Khoá học và coaching AI thực chiến: tự dựng website bằng AI, hoặc đồng hành 1:1 để làm việc với AI hiệu quả.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta name="description" content="Chọn đúng lộ trình: Vibe Coding để tạo sản phẩm bằng AI, hoặc Agentic Vibe Working để dùng AI hiệu quả trong công việc." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            paper: "#F8F4ED",
+            ink: "#1A1A1A",
+            mute: "#5C534A",
+            clay: "#D16643",
+            "clay-dark": "#B84F2F",
+            sand: "#EDE6DA",
+            mist: "#F3EDE3",
+          },
+          fontFamily: {
+            display: ['"Be Vietnam Pro"', "system-ui", "sans-serif"],
+            sans: ['"Be Vietnam Pro"', "system-ui", "sans-serif"],
+          },
+          boxShadow: {
+            soft: "0 12px 40px rgba(26, 26, 26, 0.06)",
+          },
+        },
+      },
+    };
+  </script>
   <style>
     :root {
-      --ink: #0f172a;
-      --mute: #475569;
-      --line: #e2e8f0;
-      --paper: #f8fafc;
-      --white: #ffffff;
-      --blue: #1e4fd8;
-      --blue-deep: #0a2463;
-      --clay: #d16643;
-      --clay-deep: #b84f2f;
+      --bg: #f8f4ed;
+      --ink: #1a1a1a;
+      --accent: #d16643;
     }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+    html { scroll-behavior: smooth; }
     body {
-      min-height: 100vh;
-      font-family: "Be Vietnam Pro", system-ui, sans-serif;
+      background: var(--bg);
       color: var(--ink);
-      background:
-        radial-gradient(ellipse 90% 60% at 10% -10%, rgba(30, 79, 216, 0.12), transparent 55%),
-        radial-gradient(ellipse 70% 50% at 100% 0%, rgba(209, 102, 67, 0.1), transparent 50%),
-        linear-gradient(180deg, #eef2ff 0%, var(--paper) 45%, #f1f5f9 100%);
+      font-family: "Be Vietnam Pro", system-ui, sans-serif;
       -webkit-font-smoothing: antialiased;
     }
-
-    .wrap {
-      width: min(920px, 92vw);
-      margin: 0 auto;
-      padding: clamp(48px, 10vh, 96px) 0 64px;
+    .font-display { font-family: "Be Vietnam Pro", system-ui, sans-serif; }
+    .hero-panel {
+      background:
+        radial-gradient(900px 420px at 88% 35%, rgba(209, 102, 67, 0.38), transparent 58%),
+        radial-gradient(520px 280px at 70% 80%, rgba(237, 180, 120, 0.18), transparent 55%),
+        #1a1a1a;
     }
-
-    .brand {
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 18px;
+    .reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: rise 0.7s ease forwards;
     }
-
-    h1 {
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 800;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      max-width: 14ch;
-      margin-bottom: 16px;
+    .reveal-d1 { animation-delay: 0.08s; }
+    .reveal-d2 { animation-delay: 0.18s; }
+    .reveal-d3 { animation-delay: 0.28s; }
+    @keyframes rise {
+      to { opacity: 1; transform: translateY(0); }
     }
-
-    .lead {
-      font-size: 1.05rem;
-      line-height: 1.65;
-      color: var(--mute);
-      max-width: 42ch;
-      margin-bottom: 48px;
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; animation: none; }
     }
-
-    .courses {
-      display: grid;
-      gap: 20px;
+    .svc-visual {
+      height: 10px;
+      border-radius: 14px 14px 0 0;
     }
-
-    @media (min-width: 720px) {
-      .courses { grid-template-columns: 1fr 1fr; gap: 24px; }
-    }
-
-    .course {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      padding: 28px 28px 24px;
-      background: var(--white);
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      text-decoration: none;
-      color: inherit;
-      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
-      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-    }
-
-    .course:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
-    }
-
-    .course--coding:hover { border-color: rgba(30, 79, 216, 0.35); }
-    .course--coaching:hover { border-color: rgba(209, 102, 67, 0.4); }
-
-    .tag {
-      display: inline-flex;
-      align-self: flex-start;
-      padding: 5px 12px;
-      border-radius: 999px;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    .course--coding .tag {
-      color: var(--blue-deep);
-      background: rgba(30, 79, 216, 0.1);
-    }
-
-    .course--coaching .tag {
-      color: var(--clay-deep);
-      background: rgba(209, 102, 67, 0.12);
-    }
-
-    .course h2 {
-      font-size: 1.45rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-    }
-
-    .course p {
-      flex: 1;
-      font-size: 0.95rem;
-      line-height: 1.6;
-      color: var(--mute);
-    }
-
-    .cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 8px;
-      font-size: 0.9rem;
-      font-weight: 700;
-    }
-
-    .course--coding .cta { color: var(--blue); }
-    .course--coaching .cta { color: var(--clay-deep); }
-
-    .cta span {
-      transition: transform 0.2s ease;
-    }
-
-    .course:hover .cta span {
-      transform: translateX(4px);
-    }
-
-    footer {
-      margin-top: 56px;
-      font-size: 0.85rem;
-      color: var(--mute);
-    }
+    .svc-a { background: linear-gradient(145deg, #f0c4a8 0%, #e8a078 55%, #d16643 100%); }
+    .svc-b { background: linear-gradient(145deg, #cfe3d6 0%, #9fbfad 55%, #5f8f78 100%); }
   </style>
 </head>
-<body>
-  <main class="wrap">
-    <p class="brand">AI Courses</p>
-    <h1>Học AI thực chiến, chọn đúng lộ trình</h1>
-    <p class="lead">Hai hướng đi rõ ràng: tự dựng website bằng AI, hoặc được đồng hành 1:1 để làm việc với AI mỗi ngày.</p>
-
-    <section class="courses" aria-label="Danh sách khoá học">
-      <a class="course course--coding" href="vibe-coding/">
-        <span class="tag">Khoá học</span>
-        <h2>Vibe Coding</h2>
-        <p>Tự tạo website chuyên nghiệp chỉ với AI — nhanh, dễ, không cần lập trình.</p>
-        <span class="cta">Vào khoá học <span aria-hidden="true">→</span></span>
+<body class="bg-paper text-ink antialiased">
+  <header class="sticky top-0 z-40 border-b border-black/5 bg-paper/90 backdrop-blur-md">
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
+      <a href="#top" class="font-display text-xl font-semibold tracking-tight text-ink">
+        AI Courses
       </a>
-
-      <a class="course course--coaching" href="agentic-vibe-working/">
-        <span class="tag">Coaching</span>
-        <h2>Agentic Vibe Working</h2>
-        <p>AI đồng hành 1:1 cho người không chuyên kỹ thuật — khám phá, gỡ kẹt, hoặc trao tay quy trình.</p>
-        <span class="cta">Xem dịch vụ <span aria-hidden="true">→</span></span>
+      <nav class="hidden items-center gap-8 text-sm font-medium text-mute sm:flex">
+        <a href="vibe-coding/" class="hover:text-ink">Vibe Coding</a>
+        <a href="agentic-vibe-working/" class="hover:text-ink">Agentic Vibe Working</a>
+      </nav>
+      <a
+        href="#khoahoc"
+        class="rounded-full bg-clay px-4 py-2 text-sm font-semibold text-white shadow-soft transition hover:bg-clay-dark"
+      >
+        Chọn khoá
       </a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="px-5 pb-6 pt-8 sm:pt-12">
+      <div class="mx-auto max-w-6xl">
+        <div class="hero-panel relative overflow-hidden rounded-[28px] px-6 py-10 text-white sm:px-12 sm:py-14">
+          <p class="reveal font-display text-lg text-white/70 sm:text-xl">AI Courses</p>
+          <h1 class="reveal reveal-d1 mt-4 max-w-3xl font-display text-4xl font-semibold leading-[1.12] tracking-tight sm:text-5xl">
+            Chọn đúng lộ trình<br class="hidden sm:block" /> làm việc với AI
+          </h1>
+          <p class="reveal reveal-d2 mt-5 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg">
+            Hai hướng rõ ràng: tạo sản phẩm bằng AI, hoặc nâng năng lực dùng AI trong công việc mỗi ngày.
+          </p>
+        </div>
+      </div>
     </section>
 
-    <footer>
-      <p>© 2026 AI Courses · Thêm khoá mới: tạo folder mới + <code>index.html</code>, rồi push lên GitHub Pages.</p>
-    </footer>
+    <!-- Left: 2 course cards | Right: speaker -->
+    <section id="khoahoc" class="px-5 py-6 sm:py-10">
+      <div class="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-stretch lg:gap-8">
+        <div class="flex flex-col gap-5">
+          <a
+            href="vibe-coding/"
+            class="reveal group flex flex-1 flex-col overflow-hidden rounded-2xl bg-white shadow-soft ring-1 ring-black/5 transition hover:-translate-y-0.5 hover:shadow-[0_16px_44px_rgba(26,26,26,0.1)]"
+          >
+            <div class="svc-visual svc-a" aria-hidden="true"></div>
+            <div class="flex flex-1 flex-col justify-center p-7 sm:p-9">
+              <p class="text-xs font-semibold uppercase tracking-wider text-mute">Khoá học</p>
+              <h2 class="mt-2 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
+                Vibe Coding
+              </h2>
+              <span class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-clay transition group-hover:text-clay-dark">
+                Vào khoá học
+                <span aria-hidden="true" class="transition group-hover:translate-x-1">→</span>
+              </span>
+            </div>
+          </a>
+
+          <a
+            href="agentic-vibe-working/"
+            class="reveal reveal-d1 group flex flex-1 flex-col overflow-hidden rounded-2xl bg-white shadow-soft ring-1 ring-black/5 transition hover:-translate-y-0.5 hover:shadow-[0_16px_44px_rgba(26,26,26,0.1)]"
+          >
+            <div class="svc-visual svc-b" aria-hidden="true"></div>
+            <div class="flex flex-1 flex-col justify-center p-7 sm:p-9">
+              <p class="text-xs font-semibold uppercase tracking-wider text-mute">Coaching</p>
+              <h2 class="mt-2 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
+                Agentic Vibe Working
+              </h2>
+              <span class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-clay transition group-hover:text-clay-dark">
+                Xem dịch vụ
+                <span aria-hidden="true" class="transition group-hover:translate-x-1">→</span>
+              </span>
+            </div>
+          </a>
+        </div>
+
+        <aside class="reveal reveal-d2 overflow-hidden rounded-2xl bg-white shadow-soft ring-1 ring-black/5">
+          <div class="relative h-full min-h-[320px] sm:min-h-[420px] lg:min-h-full">
+            <img
+              src="assets/speaker.png"
+              alt="Diễn giả — Thảo"
+              class="absolute inset-0 h-full w-full object-cover object-[70%_20%]"
+            />
+            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/80 via-ink/35 to-transparent px-6 pb-6 pt-16">
+              <p class="font-display text-lg font-semibold text-white">Thảo</p>
+              <p class="mt-1 text-sm text-white/75">Mentor AI · Vibe Coding &amp; Agentic Vibe Working</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Description card -->
+    <section class="px-5 pb-14 sm:pb-20">
+      <div class="reveal reveal-d3 mx-auto max-w-6xl overflow-hidden rounded-[28px] bg-white shadow-soft ring-1 ring-black/5">
+        <div class="bg-mist px-6 py-10 sm:px-10 sm:py-12">
+          <p class="text-xs font-bold uppercase tracking-[0.14em] text-clay">Dành cho ai</p>
+          <h2 class="mt-3 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
+            Chọn khoá theo nhu cầu của bạn
+          </h2>
+          <div class="mt-8 grid gap-6 md:grid-cols-2">
+            <article class="rounded-2xl bg-paper p-6 ring-1 ring-black/5">
+              <p class="text-xs font-semibold uppercase tracking-wider text-mute">Khoá học</p>
+              <h3 class="mt-2 font-display text-xl font-semibold tracking-tight">Vibe Coding</h3>
+              <p class="mt-3 text-base leading-relaxed text-mute">
+                Dành cho người muốn tạo sản phẩm dù đã biết 1 chút, hay hoàn toàn chưa biết gì.
+              </p>
+              <a href="vibe-coding/" class="mt-5 inline-flex text-sm font-semibold text-clay hover:text-clay-dark">
+                Xem Vibe Coding →
+              </a>
+            </article>
+            <article class="rounded-2xl bg-paper p-6 ring-1 ring-black/5">
+              <p class="text-xs font-semibold uppercase tracking-wider text-mute">Coaching</p>
+              <h3 class="mt-2 font-display text-xl font-semibold tracking-tight">Agentic Vibe Working</h3>
+              <p class="mt-3 text-base leading-relaxed text-mute">
+                Dành cho người muốn dùng AI chưa biết bắt đầu từ đâu, hoặc muốn nâng cao năng lực sử dụng AI trong công việc.
+              </p>
+              <a href="agentic-vibe-working/" class="mt-5 inline-flex text-sm font-semibold text-clay hover:text-clay-dark">
+                Xem Agentic Vibe Working →
+              </a>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <footer class="border-t border-black/5 px-5 py-10">
+    <div class="mx-auto flex max-w-6xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <p class="font-display text-lg font-semibold">AI Courses</p>
+      <p class="text-sm text-mute">
+        © <span id="y"></span> · Vibe Coding &amp; Agentic Vibe Working
+      </p>
+    </div>
+  </footer>
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
